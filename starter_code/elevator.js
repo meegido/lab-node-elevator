@@ -4,6 +4,8 @@ class Elevator {
     this.MAXFLOOR = 10;
     this.requests = [];
     this.direction = "up";
+    this.waitingList = [];
+    this.passengers = [];
   }
 
   start() {
@@ -18,8 +20,21 @@ class Elevator {
     this.log()
    }
 
-  _passengersEnter() { }
-  _passengersLeave() { }
+  _passengersEnter(person) {
+    if(this.floor === person.originFloor) {
+      this.passengers.push(person);
+      this.waitingList.pop();
+      this.requests.push(person.destinationFloor);
+      console.log(`${person.name} has enter the elevator`);
+      }
+    }
+
+  _passengersLeave(person) {
+    if(this.floor === person.destinationFloor) {
+      this.request.pop();
+      console.log(`${person.name} has left the elevator`);
+    }
+  }
 
   floorUp() {
     if(this.floor === this.MAXFLOOR) {
@@ -41,8 +56,11 @@ class Elevator {
   }
 
   call(person) {
-    this.requests.push(person);
-    console.log(person);
+    this.requests.push(person.originFloor);
+    this.waitingList.push(person);
+    this._passengersEnter(person);
+    this._passengersLeave(person);
+
   }
 
 
