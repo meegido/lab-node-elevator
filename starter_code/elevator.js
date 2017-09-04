@@ -18,15 +18,14 @@ class Elevator {
     this.log()
    }
 
-  //
-  // _passengersEnter() { }
-  //
-  // _passengersLeave() { }
-  //
+  _passengersEnter() { }
+  _passengersLeave() { }
+
   floorUp() {
     if(this.floor === this.MAXFLOOR) {
       console.log("noooooo")
     } else {
+      this.direction = "up"
       this.floor += 1
     }
 
@@ -36,12 +35,16 @@ class Elevator {
     if(this.floor === 0) {
       console.log("no puedes bajar más")
     } else {
+      this.direction = "down"
       this.floor -= 1
     }
   }
 
-  // call() { }
-  //
+  call(person) {
+    this.requests.push(person);
+    console.log(person);
+  }
+
 
   log() {
     console.log(this.floor, this.direction);
